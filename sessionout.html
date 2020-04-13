@@ -1,0 +1,80 @@
+ 
+
+<link rel='stylesheet' type='text/css' href='https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css'>
+<link rel="stylesheet" type="text/css" href="https://htmlguyllc.github.io/jAlert/dist/jAlert.css">
+
+<!--HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries--> 
+<!--[if lt IE 9]>--> 
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<!--[endif]--> 
+
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<script src='https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js'></script>
+<script src='https://htmlguyllc.github.io/jAlert/dist/jAlert.min.js'></script>
+<script src='src/jTimeout.js'></script>
+
+<script>
+    
+    
+    $(function () {
+        $(document).on('click', function (e) {
+            
+          //  e.preventDefault();
+             $.jTimeout.reset();
+        })
+        $('#secondsRemaining').val($.jTimeout().getSecondsTillExpiration());
+
+//        $('.60Left').on('click', function (e) {
+//            e.preventDefault();
+//            $.jTimeout.reset(60);
+//            $('#secondsRemaining').val($.jTimeout().getSecondsTillExpiration());
+//        });
+//
+//        $('.1440Left').on('click', function (e) {
+//            e.preventDefault();
+//            $.jTimeout.reset();
+//            $('#secondsRemaining').val($.jTimeout().getSecondsTillExpiration());
+//        });
+//
+//        $('.0Left').on('click', function (e) {
+//            e.preventDefault();
+//            $.jTimeout.reset(0);
+//            $('#secondsRemaining').val($.jTimeout().getSecondsTillExpiration());
+//        });
+
+        $.jTimeout({
+            /* For this example only */
+            'onClickExtend': function (jTimeout)
+            {
+                $('.jAlert').closeAlert();
+                $.jTimeout().resetExpiration();
+            },
+            'extendOnMouseMove': true,
+            'loginUrl': 'login.php',
+            'logoutUrl': 'Logout.php'
+        });
+
+        var timer,
+                setTimer = function () {
+                    timer = window.setInterval(function () {
+                        $('#secondsRemaining').val($.jTimeout().getSecondsTillExpiration());
+                    }, 1000);
+                };
+
+        setTimer();
+
+    });
+</script>
+
+<!--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-126490722-3"></script>
+<script>
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag() {
+                                dataLayer.push(arguments);
+                            }
+                            gtag('js', new Date());
+
+                            gtag('config', 'UA-126490722-3');
+</script>-->
+
